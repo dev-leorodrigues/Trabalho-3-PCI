@@ -107,3 +107,57 @@ void mostravalor(int tipo, void *dados) {
 
     return lista;
 }
+
+No *remover(No *lista, int tipo, void *valor) {
+    No *anterior = NULL;
+    No *aux = lista;
+
+    while (aux != NULL) {
+        if (aux->tipo == tipo && iguais(tipo, aux->dados, valor)) {
+            if (anterior == NULL) 
+                lista = aux->proximo;
+            else
+                anterior->proximo = aux->proximo;
+
+            free(aux->dados);
+            free(aux);
+            printf("Removido!\n");
+            return lista;
+        }
+        anterior = aux;
+        aux = aux->proximo;
+    }
+
+    printf("Nao achei esse elemento.\n");
+    return lista;
+}
+
+int buscar(No *lista, int tipo, void *valor) {
+    int pos = 1;
+    No *aux = lista;
+
+    while (aux != NULL) {
+        if (aux->tipo == tipo && iguais(tipo, aux->dados, valor))
+            return pos;
+        aux = aux->proximo;
+        pos++;
+    }
+    return 0;
+}
+
+void imprimir(No *lista) {
+    int pos = 1;
+    No *aux = lista;
+
+    if (lista == NULL) {
+        printf("Lista vazia\n");
+        return;
+    }
+
+    while (aux != NULL) {
+        printf("%d - ", pos);
+        mostrar_valor(aux->tipo, aux->dados);
+        aux = aux->proximo;
+        pos++;
+    }
+}
