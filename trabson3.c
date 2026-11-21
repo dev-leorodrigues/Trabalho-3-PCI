@@ -161,3 +161,15 @@ void imprimir(No *lista) {
         pos++;
     }
 }
+
+int lerTipo() {
+    int t;
+    printf("Tipo (1-int, 2-float, 3-char, 4-aluno): ");
+    scanf("%d", &t);
+
+    while (t < ____ || t > ____) {
+        printf("Tipo invalido! Digite de novo: ");
+        scanf("%d", &t);
+    }
+    return t;
+}
