@@ -1,10 +1,10 @@
 #include <stdio.h>  
 #include <stdlib.h>
 
-#define Int 1   
-#define Float 2
-#define Char 3
-#define ALuno 4
+#define INT 1   
+#define FLOAT 2
+#define CHAR 3
+#define ALUNO 4
 
 
 typedef struct Aluno {
@@ -18,19 +18,19 @@ typedef struct No {
     void *dados;
 } No;
 
-int tamannho(int tipo) {
-    if (tipo == Int)
+int tamanho(int tipo) {
+    if (tipo == INT)
         return sizeof(int);
-    if (tipo == Float)
+    if (tipo == FLOAT)
         return sizeof(float);
-    if (tipo == Char)
+    if (tipo == CHAR)
         return sizeof(char);
-    if (tipo == ALuno)
+    if (tipo == ALUNO)
         return sizeof(Aluno);
     return 0;
 }
 
-int nomesiguais(char a[], char b[]) {
+int nomesIguais(char a[], char b[]) {
     int i = 0;
     while (a[i] != '\0' || b[i] != '\0') {
         if (a[i] != b[i])
@@ -41,35 +41,35 @@ int nomesiguais(char a[], char b[]) {
 }
 
 int iguais(int tipo, void *a, void *b) {
-    if (tipo == Int)
+    if (tipo == INT)
         return *(int *)a == *(int *)b;
-    if (tipo == Float)
+    if (tipo == FLOAT)
         return *(float *)a == *(float *)b;
-    if (tipo == Char)
+    if (tipo == CHAR)
         return *(char *)a == *(char *)b;
-    if (tipo == ALuno) {
+    if (tipo == ALUNO) {
         Aluno *x = (Aluno *)a;
         Aluno *y = (Aluno *)b;
-        return nomesiguais(x->nome, y->nome) && x->idade == y->idade;
+        return nomesIguais(x->nome, y->nome) && x->idade == y->idade;
     }
     return 0;
 }
     void *ler_valor(int tipo) {
     void *p = malloc(tamanho(tipo));
 
-    if (tipo == Int) {
+    if (tipo == INT) {
         printf("Digite um inteiro: ");
         scanf("%d", (int *)p);
-    } else if (tipo == Float) {
+    } else if (tipo == FLOAT) {
         printf("Digite um float: ");
         scanf("%f", (float *)p);
-    } else if (tipo == Char) {
+    } else if (tipo == CHAR) {
         printf("Digite um caractere: ");
         scanf(" %c", (char *)p);
-    } else if (tipo == ALuno) {
+    } else if (tipo == ALUNO) {
         Aluno *a = (Aluno *)p;
         printf("Nome do aluno: ");
-        scanf("%s", a->nome);
+        scanf("%49s", a->nome);
         printf("Idade: ");
         scanf("%d", &a->idade);
     }
@@ -77,14 +77,14 @@ int iguais(int tipo, void *a, void *b) {
     return p;
 }
 
-void mostravalor(int tipo, void *dados) {
-    if (tipo == Int)
+void mostraValor(int tipo, void *dados) {
+    if (tipo == INT)
         printf("%d (int)\n", *(int *)dados);
-    else if (tipo == Float)
+    else if (tipo == FLOAT)
         printf("%.2f (float)\n", *(float *)dados);
-    else if (tipo == Char)
+    else if (tipo == CHAR)
         printf("%c (char)\n", *(char *)dados);
-    else if (tipo == ALuno) {
+    else if (tipo == ALUNO) {
         Aluno *a = (Aluno *)dados;
         printf("%s, %d anos (aluno)\n", a->nome, a->idade);
     }
@@ -156,7 +156,7 @@ void imprimir(No *lista) {
 
     while (aux != NULL) {
         printf("%d - ", pos);
-        mostrar_valor(aux->tipo, aux->dados);
+        mostraValor(aux->tipo, aux->dados);
         aux = aux->proximo;
         pos++;
     }
