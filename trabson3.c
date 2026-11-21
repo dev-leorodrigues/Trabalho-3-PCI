@@ -1,11 +1,13 @@
 #include <stdio.h>  
 #include <stdlib.h>
 
-#define INT 1   
-#define FLOAT 2
-#define CHAR 3
-#define ALUNO 4
 
+/* Codificacao dos tipos guardados em cada No:
+    1 = int
+    2 = float
+    3 = char
+    4 = Aluno
+*/
 
 typedef struct Aluno {
     char nome [50]; 
@@ -19,13 +21,13 @@ typedef struct No {
 } No;
 
 int tamanho(int tipo) {
-    if (tipo == INT)
+    if (tipo == 1)
         return sizeof(int);
-    if (tipo == FLOAT)
+    if (tipo == 2)
         return sizeof(float);
-    if (tipo == CHAR)
+    if (tipo == 3)
         return sizeof(char);
-    if (tipo == ALUNO)
+    if (tipo == 4)
         return sizeof(Aluno);
     return 0;
 }
@@ -41,13 +43,13 @@ int nomesIguais(char a[], char b[]) {
 }
 
 int iguais(int tipo, void *a, void *b) {
-    if (tipo == INT)
+    if (tipo == 1)
         return *(int *)a == *(int *)b;
-    if (tipo == FLOAT)
+    if (tipo == 2)
         return *(float *)a == *(float *)b;
-    if (tipo == CHAR)
+    if (tipo == 3)
         return *(char *)a == *(char *)b;
-    if (tipo == ALUNO) {
+    if (tipo == 4) {
         Aluno *x = (Aluno *)a;
         Aluno *y = (Aluno *)b;
         return nomesIguais(x->nome, y->nome) && x->idade == y->idade;
@@ -57,16 +59,16 @@ int iguais(int tipo, void *a, void *b) {
     void *ler_valor(int tipo) {
     void *p = malloc(tamanho(tipo));
 
-    if (tipo == INT) {
+    if (tipo == 1) {
         printf("Digite um inteiro: ");
         scanf("%d", (int *)p);
-    } else if (tipo == FLOAT) {
+    } else if (tipo == 2) {
         printf("Digite um float: ");
         scanf("%f", (float *)p);
-    } else if (tipo == CHAR) {
+    } else if (tipo == 3) {
         printf("Digite um caractere: ");
         scanf(" %c", (char *)p);
-    } else if (tipo == ALUNO) {
+    } else if (tipo == 4) {
         Aluno *a = (Aluno *)p;
         printf("Nome do aluno: ");
         scanf("%49s", a->nome);
@@ -78,13 +80,13 @@ int iguais(int tipo, void *a, void *b) {
 }
 
 void mostraValor(int tipo, void *dados) {
-    if (tipo == INT)
+    if (tipo == 1)
         printf("%d (int)\n", *(int *)dados);
-    else if (tipo == FLOAT)
+    else if (tipo == 2)
         printf("%.2f (float)\n", *(float *)dados);
-    else if (tipo == CHAR)
+    else if (tipo == 3)
         printf("%c (char)\n", *(char *)dados);
-    else if (tipo == ALUNO) {
+    else if (tipo == 4) {
         Aluno *a = (Aluno *)dados;
         printf("%s, %d anos (aluno)\n", a->nome, a->idade);
     }
@@ -167,9 +169,33 @@ int lerTipo() {
     printf("Tipo (1-int, 2-float, 3-char, 4-aluno): ");
     scanf("%d", &t);
 
-    while (t < ____ || t > ____) {
+    while (t < 1 || t > 4) {
         printf("Tipo invalido! Digite de novo: ");
         scanf("%d", &t);
     }
     return t;
+}
+
+int main() {
+    No *lista = NULL;
+    int op, tipo, pos;
+    void *valor;
+
+    do {
+        printf("\n1-Inserir 2-Remover 3-Buscar 4-Imprimir 0-Sair\n");
+        printf("Opcao: ");
+        scanf("%d", &op);
+
+        if (op ==1) {
+            tipo = lerTipo();
+            valor = ler_valor(tipo);
+            lista = inserir(lista, tipo, valor);
+        
+        } else if (op == 2) {
+            tipo = lerTipo();
+            valor = ler_valor(tipo);
+            lista = remover(lista, tipo, valor);
+            free(valor);
+        }
+    }
 }
