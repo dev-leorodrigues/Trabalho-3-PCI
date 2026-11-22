@@ -329,5 +329,6 @@ int main()
 
     } while (op != 0);
 
+    liberar(lista);
     return 0;
 }
