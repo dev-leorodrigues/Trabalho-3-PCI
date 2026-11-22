@@ -250,6 +250,18 @@ No *carregar(No *lista) {
     return lista;
 }
 
+void liberar(No *lista) {
+    No *aux = lista;
+    No *prox;
+
+    while (aux != NULL) {
+        prox = aux->proximo;   
+        free(aux->dados);      
+        free(aux);            
+        aux = prox;            
+    }
+}
+
 int lerTipo()
 {
     int t;
