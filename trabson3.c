@@ -272,7 +272,7 @@ int main()
 
     do
     {
-        printf("\n1-Inserir 2-Remover 3-Buscar 4-Imprimir 0-Sair\n");
+        printf("\n1-Inserir 2-Remover 3-Buscar 4-Imprimir 5-Salvar 6-Carregar 0-Sair\n");
         printf("Opcao: ");
         scanf("%d", &op);
 
@@ -304,10 +304,17 @@ int main()
         {
             imprimir(lista);
         }
+        else if (op == 5) {
+            salvar(lista);
+        }
+        else if (op == 6) {
+            lista = carregar(lista);
+        }
         else if (op != 0)
         {
             printf("Opcao invalida!\n");
         }
+
     } while (op != 0);
 
     return 0;
