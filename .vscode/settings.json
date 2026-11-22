@@ -1,0 +1,7 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "C_Cpp.codeAnalysis.runAutomatically": true,
+    "C_Cpp.codeAnalysis.clangTidy.config": "{Checks: '-*,clang-analyzer-core.*,clang-analyzer-unix.Malloc'}"
+}

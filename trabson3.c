@@ -196,6 +196,22 @@ int main() {
             valor = ler_valor(tipo);
             lista = remover(lista, tipo, valor);
             free(valor);
+        } else if (op == 3) {
+            tipo = lerTipo();
+            valor = ler_valor(tipo);
+            pos = buscar(lista, tipo, valor);
+            if (pos == 0)
+                printf("Nao encontrado.\n");
+            else
+                printf("Encontrado na posicao %d\n", pos);
+            free(valor);
+        } else if (op == 4) {
+            imprimir(lista);
+        } else if (op != 0)
+        {
+            printf("Opcao invalida!\n");
         }
-    }
+    } while (op != 0);
+
+    return 0;
 }
